@@ -10,7 +10,7 @@ export function AgingChart({ data }: { data: any[] }) {
         <BarChart data={data}>
           <XAxis dataKey="hmo" />
           <YAxis />
-          <Tooltip formatter={(value: number) => `₦${(value / 100).toLocaleString()}`} />
+      <Tooltip formatter={(value) => `₦${(Number(value) / 100).toLocaleString()}`} />
           <Legend />
           <Bar dataKey="d0_30" stackId="a" fill="#22c55e" name="0-30 days" />
           <Bar dataKey="d31_60" stackId="a" fill="#facc15" name="31-60 days" />
