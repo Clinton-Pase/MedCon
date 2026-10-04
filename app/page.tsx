@@ -26,12 +26,11 @@ const aging = await getAging();
     {overview.needAttention} need attention
   </Link>
 </p>
-
-      <div className="grid grid-cols-3 gap-4">
+<div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
         {cards.map((card) => (
           <div key={card.label} className="bg-white p-4 rounded-lg border">
             <p className="text-xs text-gray-900">{card.label}</p>
-            <p className="text-xl font-semibold text-gray-900">{formatNaira(card.value)}</p>
+           <p className="text-lg md:text-xl font-semibold text-gray-900">{formatNaira(card.value)}</p>
           </div>
         ))}
       </div>
