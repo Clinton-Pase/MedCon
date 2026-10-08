@@ -70,7 +70,7 @@ export function Sidebar() {
           </div>
         </div>
 
-        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 px-3 py-4 space-y-1">
           {links.map(({ href, label, icon: Icon }) => {
             const active = pathname === href;
             return (
