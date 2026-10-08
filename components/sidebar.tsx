@@ -18,19 +18,16 @@ const links = [
   { href: "/tariffs", label: "Tariffs", icon: Receipt },
   { href: "/hmos", label: "HMOs", icon: Building2 },
   { href: "/reports", label: "Reports", icon: BarChart3 },
+  { href: "/settings", label: "Settings", icon: Settings },
 ];
-export function Sidebar() {
+
+export function Sidebar({ mobileOpen, setMobileOpen }: { mobileOpen: boolean; setMobileOpen: (v: boolean) => void }) {
   const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  // delete this line, no longer needed here:
+  // const [mobileOpen, setMobileOpen] = useState(false);
   return (
     <>
-      {/* Floating menu button, mobile only, separate from any page content */}
-      <button
-        onClick={() => setMobileOpen(true)}
-        className="md:hidden fixed bottom-24 right-4 z-30 w-11 h-11 rounded-l bg-white shadow-md border flex items-center justify-center text-gray-900"
-      >
-        <Menu size={20} />
-      </button>
+    
 
       {mobileOpen && (
         <div
@@ -89,20 +86,20 @@ export function Sidebar() {
             );
           })}
         </nav>
-
         <div className="px-3 py-4 border-t shrink-0">
-          <Link
-            href="/settings"
-            onClick={() => setMobileOpen(false)}
-            className={`flex items-center gap-3 px-3 py-2 rounded-[0.3rem] text-sm font-medium whitespace-nowrap ${
-              pathname === "/settings" ? "bg-blue-600 text-gray-50" : "text-gray-900 hover:bg-gray-500"
-            }`}
-          >
-            <Settings size={20} className="shrink-0" />
-            <span className="md:hidden">Settings</span>
-            <span className="hidden md:group-hover:inline">Settings</span>
-          </Link>
-        </div>
+  <button
+    onClick={() => {
+      // TODO: wire to real logout once auth is ready (Phase 9)
+      alert("Logout coming soon");
+    }}
+    className="flex items-center gap-3 px-3 py-2 rounded-[0.3rem] text-sm font-medium whitespace-nowrap w-full text-red-600 hover:bg-red-50"
+  >
+    <LogOut size={20} className="shrink-0" />
+    <span className="md:hidden">Log out</span>
+    <span className="hidden md:group-hover:inline">Log out</span>
+  </button>
+</div>
+
       </aside>
     </>
   );
