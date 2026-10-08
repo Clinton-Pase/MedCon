@@ -95,7 +95,7 @@ export function Sidebar() {
             href="/settings"
             onClick={() => setMobileOpen(false)}
             className={`flex items-center gap-3 px-3 py-2 rounded-[0.3rem] text-sm font-medium whitespace-nowrap ${
-              pathname === "/settings" ? "bg-blue-600 text-gray-900" : "text-gray-50 hover:bg-gray-500"
+              pathname === "/settings" ? "bg-blue-600 text-gray-50" : "text-gray-900 hover:bg-gray-500"
             }`}
           >
             <Settings size={20} className="shrink-0" />

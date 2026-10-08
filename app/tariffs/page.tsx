@@ -8,7 +8,22 @@ export default async function TariffsPage() {
     <div>
       <h1 className="text-2xl font-bold text-gray-900 mb-4">Tariffs</h1>
 
-      <table className="w-full text-sm border-collapse">
+      {/* Mobile: stacked cards */}
+      <div className="md:hidden space-y-3">
+        {tariffs.map((t) => (
+          <div key={t.id} className="bg-white p-4 rounded-lg border">
+            <div className="flex items-center justify-between mb-1">
+              <span className="font-medium text-gray-900">{t.service}</span>
+              <span className="font-semibold text-gray-900">{formatNaira(t.amount)}</span>
+            </div>
+            <p className="text-sm text-gray-600">{t.hmo}</p>
+            <p className="text-xs text-gray-500">Effective {t.effectiveFrom}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop: table */}
+      <table className="hidden md:table w-full text-sm border-collapse">
         <thead>
           <tr className="text-left border-b">
             <th className="py-2">HMO</th>

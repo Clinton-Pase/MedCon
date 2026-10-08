@@ -21,7 +21,31 @@ export default async function RemittancesPage() {
     <div>
       <h1 className="text-2xl font-bold text-gray-900 mb-4">Remittances</h1>
 
-      <table className="w-full text-sm border-collapse">
+      {/* Mobile: stacked cards */}
+      <div className="md:hidden space-y-3">
+        {remittances.map((r) => (
+          <div key={r.id} className="bg-white p-4 rounded-lg border">
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-medium text-gray-900 truncate pr-2">{r.fileName}</span>
+              <span className={`px-2 py-1 rounded-full text-xs font-medium shrink-0 ${statusColor(r.status)}`}>
+                {r.status}
+              </span>
+            </div>
+            <p className="text-sm text-gray-700">{r.hmo}</p>
+            <div className="flex justify-between text-sm mt-2">
+              <span className="text-gray-500">{r.uploadedAt} · {r.rowCount} rows</span>
+              {r.status === "COMPLETED" && (
+                <Link href="/remittances/review" className="text-blue-600 hover:underline text-xs">
+                  Review
+                </Link>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop: table */}
+      <table className="hidden md:table w-full text-sm border-collapse">
         <thead>
           <tr className="text-left border-b">
             <th className="py-2">File</th>

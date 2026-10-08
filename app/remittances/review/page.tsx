@@ -39,12 +39,12 @@ export default function RemittanceReviewPage() {
       <h1 className="text-2xl font-bold text-gray-900 mb-1">Review Extracted Remittance</h1>
       <p className="text-sm text-gray-500 mb-4">Model: {job.modelVersion}</p>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white p-4 rounded-lg border h-[500px] flex items-center justify-center">
+   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-white p-4 rounded-lg border h-[300px] md:h-[500px] flex items-center justify-center">
           <p className="text-gray-400 text-sm">Document image goes here</p>
         </div>
 
-        <div className="bg-white p-4 rounded-lg border h-[500px] flex flex-col">
+        <div className="bg-white p-4 rounded-lg border h-[300px] md:h-[500px] flex flex-col">
           <h2 className="font-semibold text-gray-900 mb-3">Extracted fields</h2>
 
           <div className="space-y-3 flex-1">

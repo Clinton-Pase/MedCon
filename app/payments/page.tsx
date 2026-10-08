@@ -13,7 +13,26 @@ export default async function PaymentsPage() {
     <div>
       <h1 className="text-2xl font-bold text-gray-900 mb-4">Payments</h1>
 
-      <table className="w-full text-sm border-collapse">
+      {/* Mobile: stacked cards */}
+      <div className="md:hidden space-y-3">
+        {payments.map((p) => (
+          <Link
+            key={p.id}
+            href={`/claims/${p.claimId}`}
+            className="block bg-white p-4 rounded-lg border"
+          >
+            <div className="flex items-center justify-between mb-1">
+              <span className="font-medium text-blue-600">{p.claimId}</span>
+              <span className="font-semibold text-gray-900">{formatNaira(p.amount)}</span>
+            </div>
+            <p className="text-sm text-gray-700">{sourceLabel(p.source)}</p>
+            <p className="text-xs text-gray-500">{p.date} · {p.reference}</p>
+          </Link>
+        ))}
+      </div>
+
+      {/* Desktop: table */}
+      <table className="hidden md:table w-full text-sm border-collapse">
         <thead>
           <tr className="text-left border-b">
             <th className="py-2">Date</th>

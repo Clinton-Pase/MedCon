@@ -24,11 +24,12 @@ export default async function ClaimDetailPage({ params }: { params: Promise<{ id
         {claim.patientName} · {claim.hmo} · {claim.status}
       </p>
 
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      {/* Responsive stats grid: 2 per row on mobile, 4 on desktop */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
         {stats.map((s) => (
           <div key={s.label} className="bg-white p-4 rounded-lg border">
             <p className="text-xs text-gray-500">{s.label}</p>
-            <p className="font-semibold text-gray-900">{formatNaira(s.value)}</p>
+            <p className="text-lg md:text-xl font-semibold text-gray-900">{formatNaira(s.value)}</p>
           </div>
         ))}
       </div>
@@ -38,28 +39,47 @@ export default async function ClaimDetailPage({ params }: { params: Promise<{ id
         {claim.allocations.length === 0 ? (
           <p className="text-sm text-gray-500">No payments yet.</p>
         ) : (
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="text-left border-b">
-                <th className="py-2">Date</th>
-                <th className="py-2">Source</th>
-                <th className="py-2">Reference</th>
-                <th className="py-2">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
+          <>
+            {/* Mobile: stacked cards */}
+            <div className="md:hidden space-y-3">
               {claim.allocations.map((a) => (
-                <tr key={a.id} className="border-b">
-                  <td className="py-2">{a.date}</td>
-                  <td className="py-2">{a.source === "HMO" ? "HMO payment" : "Patient (Paystack)"}</td>
-                  <td className="py-2">{a.reference}</td>
-                  <td className="py-2">{formatNaira(a.amount)}</td>
-                </tr>
+                <div key={a.id} className="border rounded-lg p-3">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm font-medium text-gray-900">
+                      {a.source === "HMO" ? "HMO payment" : "Patient (Paystack)"}
+                    </span>
+                    <span className="text-sm font-semibold text-gray-900">{formatNaira(a.amount)}</span>
+                  </div>
+                  <p className="text-xs text-gray-500">{a.date} · {a.reference}</p>
+                </div>
               ))}
-            </tbody>
-          </table>
+            </div>
+
+            {/* Desktop: table */}
+            <table className="hidden md:table w-full text-sm border-collapse">
+              <thead>
+                <tr className="text-left border-b">
+                  <th className="py-2">Date</th>
+                  <th className="py-2">Source</th>
+                  <th className="py-2">Reference</th>
+                  <th className="py-2">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {claim.allocations.map((a) => (
+                  <tr key={a.id} className="border-b">
+                    <td className="py-2">{a.date}</td>
+                    <td className="py-2">{a.source === "HMO" ? "HMO payment" : "Patient (Paystack)"}</td>
+                    <td className="py-2">{a.reference}</td>
+                    <td className="py-2">{formatNaira(a.amount)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
         )}
       </div>
+
       <PaystackButton claimId={claim.id} balance={claim.balance} />
     </div>
   );
