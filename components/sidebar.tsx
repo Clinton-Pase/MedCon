@@ -41,7 +41,7 @@ export function Sidebar() {
 
       <aside
         className={`group bg-white border-r h-screen flex flex-col fixed md:sticky top-0 z-50
-          transition-all duration-300 overflow-hidden
+          transition-all duration-300 overflow-x-hidden overflow-y-auto
           w-64 md:w-20 md:hover:w-64
           ${mobileOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
       >
